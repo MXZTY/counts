@@ -74,6 +74,16 @@ td {
   border-color: grey;
   margin-top: 10px !important;
 }
+.settleButton {
+  background-color: lightgray !important;
+  font-weight: bold;
+  font-size: 30px !important;
+  color: grey !important;
+  padding: 10px 30px;
+  border-color: grey;
+  margin-top: 10px !important;
+  width: 100% !important;
+}
 
 td input {
   width: 100px;
@@ -82,4 +92,23 @@ td input {
   color: grey;
   font-weight: bold;
   border: 0;
+}
+
+.totalDonut {
+  width: 300px !important;
+  text-align: center !important;
+  float: right;
+  margin-right: 200px !important;
+}
+
+.rightDonut {
+  max-width: 300px;
+  float: right;
+}
+
+.lockInputs {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

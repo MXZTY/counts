@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import $ from "jquery";
 import inventory from "./inventory.json";
 import Items from "./items";
 import Totals from "./totals";
@@ -50,6 +51,12 @@ class Counts extends Component {
   };
 
   handleRowChange = e => {
+    // check if the element has a readonly attribute set to true
+    // this will return null if the settle button has been clicked.
+    if (e.target.hasAttribute("readonly")) {
+      return null;
+    }
+
     //copy inventory so we can modify it without modifying the state directly
     const tempInventory = { ...inventory };
 
@@ -67,20 +74,32 @@ class Counts extends Component {
     this.setState({ inventory: tempInventory });
   };
 
+  setTotal = () => {
+    const circleElement = document.getElementsByTagName("circle");
+    $(circleElement).before("<h3>test</h3>");
+  };
+
+  // we need to return multiple instances of an item but only 1 instance of totals, so return an array.
   render() {
-    return this.state.inventory.items.map(item => {
-      return (
-        <React.Fragment key={Math.random(100)}>
-          <Items
-            key={item.id}
-            item={item}
-            handleRowChange={this.handleRowChange}
-            grandTotals={this.state.grandTotals}
-          />
-          <Totals key={Math.random(100)} />
-        </React.Fragment>
-      );
-    });
+    return [
+      this.state.inventory.items.map(item => {
+        return (
+          <React.Fragment key={Math.random(100)}>
+            <Items
+              key={item.id}
+              item={item}
+              handleRowChange={this.handleRowChange}
+              grandTotals={this.state.grandTotals}
+            />
+          </React.Fragment>
+        );
+      }),
+      <div key="totalsSection" className="container totalDonut">
+        <h2>Total</h2>
+        <Totals data={this.state.chartData} />
+      </div>,
+      this.setTotal()
+    ];
   }
 }
 
