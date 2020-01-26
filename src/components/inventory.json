@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "id": "Poster1",
+      "img": "../images/poster.jpg",
+      "price": 10.0,
+      "description": "4x4",
+      "quantityAvailable": -7,
+      "countIn": 0,
+      "add": 0,
+      "comp": 0,
+      "countOut": 0,
+      "totalIn": 0,
+      "totalSold": 0,
+      "totalGross": 0.0
+    }
+  ]
+}
