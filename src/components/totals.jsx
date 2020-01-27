@@ -23,7 +23,10 @@ class Totals extends Component {
     return (
       <div>
         <DonutChart data={dataPie} />
-        <h2 className="color-primary">TOTAL</h2>
+        <h2 className="color-primary">${this.props.grossTotal}</h2>
+        <h2 className="color-primary">
+          Total Units Sold: {this.props.totalSold}
+        </h2>
         <button
           className="btn settleButton bordered"
           onClick={this.handleClick}

@@ -9,7 +9,7 @@ class totalsRow extends Component {
     // const dataPie = [
     //   {
     //     title: "test",
-    //     value: 100,
+    //     value: parseFloat(this.props.totals.totalIn / this.props.countOutTotal),
     //     stroke: "#00c7fc",
     //     strokeWidth: 3
     //   }

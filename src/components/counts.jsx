@@ -40,7 +40,8 @@ class Counts extends Component {
     ];
   }
 
-  // this function takes in the item and updates the grand totals to be displayed in the bottom row of the grid.
+  // this function takes in the item and updates the grand totals to be displayed
+  // in the bottom row of the grid.
   updateColumnTotals = inventory => {
     // copy the state into a temporary variable so it can be updated.
     const grandTotals = { ...this.state.grandTotals };
@@ -86,8 +87,6 @@ class Counts extends Component {
     item.totalIn = totalIn;
     item.totalSold = totalSold;
     item.grossTotal = parseFloat(totalGross).toFixed(2);
-
-    // this.updateColumnTotals(item);
   };
 
   // this function will handle any changes made to a row and
@@ -126,6 +125,8 @@ class Counts extends Component {
 
     //lastly, set the state with the newly updated values.
     this.setState({ inventory: tempInventory });
+
+    // update the columnTotals.
     this.updateColumnTotals(tempInventory);
   };
 
