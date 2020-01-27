@@ -18,37 +18,43 @@ const Item = props => {
     <tr key={props.item.id}>
       <td className="price d-flex align-items-center">
         <input
+          type="number"
           id={props.item.id + "-price"}
-          value={"$" + price.toFixed(2)}
+          value={price.toFixed(2)}
           readOnly="readonly"
         />
       </td>
       <td className="qty">
         <input
+          type="number"
           className={"color-default"}
           id={props.item.id + "-qty"}
           value={quantityAvailable}
           readOnly="readonly"
         />
       </td>
-      <td className="countIn bordered">
+      <td className="bordered">
         <input
+          type="number"
+          className="countIn"
           id={props.item.id + "-countIn"}
           defaultValue={countIn}
           onBlur={props.handleRowChange}
         />
       </td>
-      <td className="add bordered">
+      <td className="bordered">
         <input
-          className="color-success"
+          type="number"
+          className="color-success add"
           id={props.item.id + "-add"}
           defaultValue={add}
           onBlur={props.handleRowChange}
         />
       </td>
-      <td className="totalIn bordered">
+      <td className="bordered">
         <input
-          className="color-primary"
+          type="number"
+          className="color-primary totalIn"
           id={props.item.id + "-totalIn"}
           value={totalIn}
           readOnly="readonly"
@@ -56,30 +62,35 @@ const Item = props => {
       </td>
       <td className="comp bordered">
         <input
-          className="text-danger"
+          type="number"
+          className="text-danger comp"
           id={props.item.id + "-comp"}
           defaultValue={comp}
           onBlur={props.handleRowChange}
         />
       </td>
-      <td className="countOut bordered">
+      <td className="bordered">
         <input
+          type="number"
+          className="countOut"
           id={props.item.id + "-countOut"}
           defaultValue={props.item.countOut}
           onBlur={props.handleRowChange}
         />
       </td>
-      <td className="totalSold bordered">
+      <td className="bordered">
         <input
-          className="color-primary"
+          type="number"
+          className="color-primary totalSold"
           id={props.item.id + "-totalSold"}
           value={totalSold}
           readOnly="readonly"
         />
       </td>
-      <td className="grossTotal bordered">
+      <td className="bordered">
         <input
-          className="color-primary"
+          type="number"
+          className="color-primary grossTotal"
           id={props.item.id + "-grossTotal"}
           defaultValue={grossTotal}
           readOnly="readonly"

@@ -34,7 +34,9 @@ class totalsRow extends Component {
           {/* <DonutChart className="smallDonut" data={dataPie} /> */}
           {this.props.totals.totalSold}
         </td>
-        <td className="align-middle color-primary" colSpan="2"></td>
+        <td className="align-middle color-primary" colSpan="2">
+          ${this.props.totals.grossTotal}
+        </td>
       </tr>
     );
   }

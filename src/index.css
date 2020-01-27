@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .color-primary {
   color: #00c7fc;
 }
@@ -45,11 +54,10 @@ td {
   text-align: center;
   font-size: 25px;
   color: #646464;
-  width: 100px;
 }
 
 td input {
-  width: inherit;
+  width: 100px;
   padding: 0px !important;
   text-align: center;
   color: grey;
