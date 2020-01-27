@@ -2,29 +2,32 @@ import React, { Component } from "react";
 import DonutChart from "react-svg-donut-chart";
 
 class Totals extends Component {
+  // this function will disable all inputs on the document object by setting its readonly value to true.
   handleClick = () => {
-    console.log("locking Inputs");
     const inputs = document.getElementsByTagName("input");
-
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].setAttribute("readonly", "true");
     }
   };
 
   render() {
+    // currently having issues with react-svg-donut-chart and should try utilizing canvas.js instead.
     const dataPie = [
       {
-        defaultTitle: "value",
-        defaultLabel: "testing",
+        title: "test",
         value: 100,
-        stroke: "#007bff",
+        stroke: "#00c7fc",
         strokeWidth: 3
       }
     ];
     return (
       <div>
         <DonutChart data={dataPie} />
-        <button className="btn btn-lg settleButton" onClick={this.handleClick}>
+        <h2 className="color-primary">TOTAL</h2>
+        <button
+          className="btn settleButton bordered"
+          onClick={this.handleClick}
+        >
           Settle
         </button>
       </div>

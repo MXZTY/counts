@@ -5,6 +5,7 @@
       "img": "../images/poster.jpg",
       "price": 10.0,
       "description": "4x4",
+      "note": "",
       "quantityAvailable": -7,
       "countIn": 0,
       "add": 0,

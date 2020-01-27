@@ -1,6 +1,7 @@
 import React from "react";
 
 //Stateless Functional Component
+//for displaying table columns and lifting onRowChange events to counts.jsx when inputs are changed.
 const Item = props => {
   const {
     price,
@@ -24,6 +25,7 @@ const Item = props => {
       </td>
       <td className="qty">
         <input
+          className={"color-default"}
           id={props.item.id + "-qty"}
           value={quantityAvailable}
           readOnly="readonly"
@@ -38,7 +40,7 @@ const Item = props => {
       </td>
       <td className="add bordered">
         <input
-          className="text-success"
+          className="color-success"
           id={props.item.id + "-add"}
           defaultValue={add}
           onBlur={props.handleRowChange}
@@ -46,7 +48,7 @@ const Item = props => {
       </td>
       <td className="totalIn bordered">
         <input
-          className="text-primary"
+          className="color-primary"
           id={props.item.id + "-totalIn"}
           value={totalIn}
           readOnly="readonly"
@@ -69,7 +71,7 @@ const Item = props => {
       </td>
       <td className="totalSold bordered">
         <input
-          className="text-primary"
+          className="color-primary"
           id={props.item.id + "-totalSold"}
           value={totalSold}
           readOnly="readonly"
@@ -77,7 +79,7 @@ const Item = props => {
       </td>
       <td className="grossTotal bordered">
         <input
-          className="text-primary"
+          className="color-primary"
           id={props.item.id + "-grossTotal"}
           defaultValue={grossTotal}
           readOnly="readonly"

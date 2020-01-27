@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import $ from "jquery";
 import inventory from "./inventory.json";
 import Items from "./items";
 import Totals from "./totals";
 
 class Counts extends Component {
+  //this is the parent state which will be updated when an event is lifted from a sub component
   state = {
     inventory: inventory,
     grandTotals: {
@@ -16,14 +16,35 @@ class Counts extends Component {
     }
   };
 
+  // return multiple instances of an item but only 1 instance of totals, so return an array.
+  render() {
+    return [
+      this.state.inventory.items.map(item => {
+        return (
+          <Items
+            key={item.id}
+            item={item}
+            handleRowChange={this.handleRowChange}
+            grandTotals={this.state.grandTotals}
+            handleMoreChange={this.handleMoreChange}
+          />
+        );
+      }),
+      <div key="totalsSection" className="container totalDonut">
+        <h2 className="color-default">TOTAL</h2>
+        <Totals
+          grossTotal={this.state.grandTotals.grossTotal}
+          totalSold={this.state.grandTotals.totalSold}
+        />
+      </div>
+    ];
+  }
+
+  // this function takes in the item and updates the grand totals to be displayed in the bottom row of the grid.
   updateColumnTotals = item => {
-    // console.log("UpdatingColumnTitles... ", item);
     // copy the state into a temporary variable so it can be updated.
     const grandTotals = { ...this.state.grandTotals };
 
-    // console.log("grandTotals......", grandTotals);
-
-    // console.log(this.state.grandTotals.totalComp);
     // update the totals for each item in the temporary "grandTotals" object
     grandTotals.totalIn = item.totalIn;
     grandTotals.totalSold = item.totalSold;
@@ -35,8 +56,9 @@ class Counts extends Component {
     this.setState({ grandTotals });
   };
 
+  // this function is for calculating the totalIn, TotalSold, and TotalGross values.
+  // it then called updateColumnTotals so that the changes reflect the new values.
   handleTotalCalculations = item => {
-    console.log("Updating Row Totals");
     //create temp variables to update state with.
     const totalIn = +item.countIn + item.add;
     const totalSold = +totalIn - item.countOut - item.comp;
@@ -50,9 +72,10 @@ class Counts extends Component {
     this.updateColumnTotals(item);
   };
 
+  // this function will handle any changes made to a row and
+  // update the state so changes can be propogated down to its children.
   handleRowChange = e => {
-    // check if the element has a readonly attribute set to true
-    // this will return null if the settle button has been clicked.
+    // prevent executing row change update by returning null if e has a readonly attribute
     if (e.target.hasAttribute("readonly")) {
       return null;
     }
@@ -64,43 +87,28 @@ class Counts extends Component {
     const itemToUpdate = tempInventory.items.find(
       item => item.id === e.target.id.split("-")[0]
     );
-
     //set the itemToUpdates new value based on the attribute being changed
     itemToUpdate[e.target.id.split("-")[1]] = +e.target.value;
 
+    // update the total calculations to be displayed in the row
     this.handleTotalCalculations(itemToUpdate);
 
     //lastly, set the state with the newly updated values.
     this.setState({ inventory: tempInventory });
   };
 
-  setTotal = () => {
-    const circleElement = document.getElementsByTagName("circle");
-    $(circleElement).before("<h3>test</h3>");
-  };
+  // this function is for handling any changes made to the item price or notes
+  handleMoreChange = (price, note, id) => {
+    const tempInventory = { ...inventory };
 
-  // we need to return multiple instances of an item but only 1 instance of totals, so return an array.
-  render() {
-    return [
-      this.state.inventory.items.map(item => {
-        return (
-          <React.Fragment key={Math.random(100)}>
-            <Items
-              key={item.id}
-              item={item}
-              handleRowChange={this.handleRowChange}
-              grandTotals={this.state.grandTotals}
-            />
-          </React.Fragment>
-        );
-      }),
-      <div key="totalsSection" className="container totalDonut">
-        <h2>Total</h2>
-        <Totals data={this.state.chartData} />
-      </div>,
-      this.setTotal()
-    ];
-  }
+    //grab the index from the id-1.
+    const parsedId = parseInt(id.slice(-1)) - 1;
+
+    const item = tempInventory.items[parsedId];
+    item.note = note;
+    item.price = +price;
+    this.setState(tempInventory);
+  };
 }
 
 export default Counts;
