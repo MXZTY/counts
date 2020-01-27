@@ -1,22 +1,47 @@
 import React, { Component } from "react";
 import Item from "./item";
 import TotalsRow from "./totalsRow";
+import $ from "jquery";
 
 class Items extends Component {
   // this will render the image, and the item grid
+  constructor(props) {
+    super(props);
+    let hasDescription, descriptionShown;
+    if (this.props.item.description === "") {
+      hasDescription = false;
+    } else {
+      hasDescription = true;
+    }
+    this.state = {
+      hasDescription: hasDescription,
+      descriptionShown: descriptionShown
+    };
+  }
   render() {
-    const imgURL = this.props.item.img;
+    // const imgURL = this.props.item.img;
     return (
       <div className="container d-flex justify-content-center">
-        <div className="imagePreview">
-          <label>
-            {this.props.item.id.slice(0, -1)}
-            <img
-              className="itemImage"
-              src={`${process.env.PUBLIC_URL}` + imgURL}
-              alt="samplePoster"
-            />
-          </label>
+        <div className="imagePreview" id="imagePreview">
+          <label>{this.props.item.id.slice(0, -1)}</label>
+          <div className="imageContainer" id="imageContainer">
+            {this.state.hasDescription ? (
+              <button
+                className="imageButton"
+                onMouseOver={() => this.buildDescriptionSpan()}
+                onMouseOut={() => this.removeDescriptionSpan()}
+              >
+                !
+              </button>
+            ) : null}
+            <div className="imageDescription" id="imageDescription"></div>
+
+            {/* <img
+                className="itemImage"
+                src={`${process.env.PUBLIC_URL}` + imgURL}
+                alt="samplePoster"
+              /> */}
+          </div>
         </div>
         <table className="table table-borderless">
           {this.buildTableHeaders()}
@@ -41,6 +66,24 @@ class Items extends Component {
       </div>
     );
   }
+
+  removeDescriptionSpan = () => {
+    const div = document.getElementById("imageDescription");
+    div.remove();
+    // const parent = document.getElementById("imageContainer");
+
+    //Having issues with parent div as it is being removed.
+    // Need to just remove the innerText and not the div so that events can reoccur without errors.
+    // parent.innerHTML(
+    //   <div className="imageDescription" id="imageDescription"></div>
+    // );
+    console.log(div.innerText);
+  };
+  buildDescriptionSpan = () => {
+    const div = document.getElementById("imageDescription");
+    div.append(this.props.item.description);
+    console.log(div);
+  };
 
   // this is a helper function for returning the table headers
   buildTableHeaders = () => {

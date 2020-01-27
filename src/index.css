@@ -159,3 +159,16 @@ ul {
 .smallDonut {
   width: 70px;
 }
+
+.imageContainer {
+  background-image: url("poster.jpg");
+  background-size: cover;
+  width: 200px;
+  height: 150px;
+}
+
+.imageButton {
+  float: right;
+  width: 30px;
+  border-radius: 100px;
+}

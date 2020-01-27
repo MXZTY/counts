@@ -4,7 +4,7 @@ import Items from "./items";
 import Totals from "./totals";
 
 class Counts extends Component {
-  //this is the parent state which will be updated when an event is lifted from a sub component
+  //this is the parent state which will need to be updated when an event is lifted from a sub component
   state = {
     inventory: inventory,
     grandTotals: {
