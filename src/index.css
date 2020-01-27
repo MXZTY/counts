@@ -169,6 +169,15 @@ ul {
 
 .imageButton {
   float: right;
+  margin-top: 10px;
   width: 30px;
   border-radius: 100px;
+}
+
+#desc {
+  background-color: white;
+  text-align: center;
+  width: 200px;
+  margin-top: 12px;
+  float: right;
 }

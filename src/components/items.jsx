@@ -68,21 +68,14 @@ class Items extends Component {
   }
 
   removeDescriptionSpan = () => {
-    const div = document.getElementById("imageDescription");
+    const div = document.getElementById("desc");
     div.remove();
-    // const parent = document.getElementById("imageContainer");
-
-    //Having issues with parent div as it is being removed.
-    // Need to just remove the innerText and not the div so that events can reoccur without errors.
-    // parent.innerHTML(
-    //   <div className="imageDescription" id="imageDescription"></div>
-    // );
-    console.log(div.innerText);
   };
   buildDescriptionSpan = () => {
     const div = document.getElementById("imageDescription");
-    div.append(this.props.item.description);
-    console.log(div);
+    $(div).append(
+      "<p id='desc'> Description: " + this.props.item.description + "</p>"
+    );
   };
 
   // this is a helper function for returning the table headers
