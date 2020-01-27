@@ -75,20 +75,33 @@ class Counts extends Component {
   // this function will handle any changes made to a row and
   // update the state so changes can be propogated down to its children.
   handleRowChange = e => {
-    // prevent executing row change update by returning null if e has a readonly attribute
-    if (e.target.hasAttribute("readonly")) {
-      return null;
-    }
-
     //copy inventory so we can modify it without modifying the state directly
     const tempInventory = { ...inventory };
+    let itemToUpdate = "";
 
-    //search for the item within the tempInventory
-    const itemToUpdate = tempInventory.items.find(
-      item => item.id === e.target.id.split("-")[0]
-    );
-    //set the itemToUpdates new value based on the attribute being changed
-    itemToUpdate[e.target.id.split("-")[1]] = +e.target.value;
+    console.log(e.target);
+
+    // check if e is an event or an item object.
+    if (e.target) {
+      // prevent executing row change update by returning null if e has a readonly attribute
+      if (e.target.hasAttribute("readonly")) {
+        return null;
+      }
+
+      //search for the item within the tempInventory
+      itemToUpdate = tempInventory.items.find(
+        item => item.id === e.target.id.split("-")[0]
+      );
+
+      //set the itemToUpdates new value based on the attribute being changed
+      itemToUpdate[e.target.id.split("-")[1]] = +e.target.value;
+    } else {
+      // e is not an event, so we can directly lookup the id in the inventory
+      // set it to our current item to recalculate totals.
+      itemToUpdate = tempInventory.items.find(item => {
+        return item.id === e.id;
+      });
+    }
 
     // update the total calculations to be displayed in the row
     this.handleTotalCalculations(itemToUpdate);
@@ -108,6 +121,9 @@ class Counts extends Component {
     item.note = note;
     item.price = +price;
     this.setState(tempInventory);
+
+    // after setting the new price, update the row so any elements affected are updated.
+    this.handleRowChange(item);
   };
 }
 

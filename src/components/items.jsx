@@ -74,6 +74,7 @@ class Items extends Component {
     const div = document.getElementById("desc");
     div.remove();
   };
+
   buildDescriptionSpan = () => {
     const div = document.getElementById("imageDescription");
     $(div).append(
