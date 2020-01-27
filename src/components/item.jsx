@@ -16,10 +16,12 @@ const Item = props => {
 
   return (
     <tr key={props.item.id}>
-      <td className="price d-flex align-items-center">
+      <td className="price d-flex align-items-center color-default">
+        $
         <input
           type="number"
           id={props.item.id + "-price"}
+          className={"color-default"}
           value={price.toFixed(2)}
           readOnly="readonly"
         />
