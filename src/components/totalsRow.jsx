@@ -6,7 +6,6 @@ class totalsRow extends Component {
   // this will render the column totals, as well as the More dropdown component
   render() {
     // issues with dataPie should try canvas.js to draw as component doesnt allow inner label.
-    console.log(this.props);
     const decimal = this.getDonutValues(
       parseFloat(this.props.totals.totalIn),
       parseFloat(this.props.totals.countOutTotal)
@@ -46,8 +45,6 @@ class totalsRow extends Component {
   }
 
   getDonutValues = (totalIn, countOut) => {
-    console.log("totalIn", totalIn);
-    console.log("countOut", countOut);
     if (totalIn === 0 && countOut === 0) {
       return 0;
     } else if (countOut === 0) {
