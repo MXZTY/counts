@@ -35,7 +35,9 @@ class totalsRow extends Component {
         <td className="">{this.props.totals.countOutTotal}</td>
         <td className="color-primary totalSoldDonutSection">
           <DonutChart className="smallDonut" data={dataPie} />
-          <p>{this.props.totals.totalSold}</p>
+          <p className={this.props.totals.totalSold >= 100 ? "textSmall" : ""}>
+            {this.props.totals.totalSold}
+          </p>
         </td>
         <td className="color-primary" colSpan="2">
           ${this.props.totals.grossTotal}
@@ -43,6 +45,15 @@ class totalsRow extends Component {
       </tr>
     );
   }
+
+  getClassName = () => {
+    console.log("trying");
+    if (this.props.totals.totalSold >= 100) {
+      return "textSmall";
+    } else {
+      return "";
+    }
+  };
 
   getDonutValues = (totalIn, countOut) => {
     if (totalIn === 0 && countOut === 0) {
