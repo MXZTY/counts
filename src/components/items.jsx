@@ -18,13 +18,22 @@ class Items extends Component {
       descriptionShown: descriptionShown
     };
   }
+
+  // this will render the image for each row, as well as the grid for each row (Item and TotalsRow components)
   render() {
-    // const imgURL = this.props.item.img;
+    const imgURL = this.props.item.img;
     return (
       <div className="container d-flex justify-content-center">
         <div className="imagePreview" id="imagePreview">
           <label>{this.props.item.id.slice(0, -1)}</label>
-          <div className="imageContainer" id="imageContainer">
+          <div
+            style={{
+              backgroundImage:
+                "url(" + `${process.env.PUBLIC_URL}` + imgURL + ")"
+            }}
+            className="imageContainer"
+            id="imageContainer"
+          >
             {this.state.hasDescription ? (
               <button
                 className="imageButton"
@@ -35,12 +44,6 @@ class Items extends Component {
               </button>
             ) : null}
             <div className="imageDescription" id="imageDescription"></div>
-
-            {/* <img
-                className="itemImage"
-                src={`${process.env.PUBLIC_URL}` + imgURL}
-                alt="samplePoster"
-              /> */}
           </div>
         </div>
         <table className="table table-borderless">
